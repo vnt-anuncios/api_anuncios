@@ -19,6 +19,11 @@ class User extends Authenticatable
         'name', 'email', 'password',
     ];
 
+    public function favoritos()
+    {
+        return $this->belongsToMany('App\Anuncio')->using('App\Favorito');
+    }
+
     /**
      * The attributes that should be hidden for arrays.
      *
