@@ -11,6 +11,6 @@ class BannerSeeder extends Seeder
      */
     public function run()
     {
-        //
+        factory(App\Banner::class,20)->create();
     }
 }

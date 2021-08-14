@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Anuncio;
 use Illuminate\Http\Request;
 
-class AnuncioController extends Controller
+class AnuncioController extends ApiController
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +14,8 @@ class AnuncioController extends Controller
      */
     public function index()
     {
-        //
+        $anuncios = Anuncio::orderBy('fecha_publicacion','DESC')->with(['fotos','user'/*,'categoria'*/])->get();
+        return $this->showAll($anuncios);
     }
 
     /**

@@ -20,3 +20,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::apiResource('categorias',CategoriaController::class,['only' => ['index','show']]);
 Route::get('categoriascredito','CreditoCategoriaController@categoriaCredito');
+Route::apiResource('anuncios',AnuncioController::class,['only' => ['index','show']]);
+

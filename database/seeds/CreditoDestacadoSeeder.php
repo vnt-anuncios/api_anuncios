@@ -11,6 +11,6 @@ class CreditoDestacadoSeeder extends Seeder
      */
     public function run()
     {
-        //
+        factory(App\CreditoDestacado::class,15)->create();
     }
 }

@@ -11,6 +11,6 @@ class DestacadoSeeder extends Seeder
      */
     public function run()
     {
-        //
+        factory(App\Destacado::class,30)->create();
     }
 }

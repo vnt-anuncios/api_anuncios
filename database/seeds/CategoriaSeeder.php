@@ -11,6 +11,14 @@ class CategoriaSeeder extends Seeder
      */
     public function run()
     {
-        //
+        factory(App\Categoria::class, 30)->create()->each(
+            function($categoria){
+                if($categoria->id > 15){
+                    $cat = App\Categoria::find($categoria->id);
+                    $cat->categoria_id =  App\Categoria::all()->random()->id;
+                    $cat->save();
+                }
+            }
+        );
     }
 }

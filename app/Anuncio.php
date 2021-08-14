@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Anuncio extends Model
 {
     protected $fillable = ['titulo', 'precio', 'estado', 'enlace', 'descripcion'];
+    protected $hidden = ['created_at','updated_at'];
 
     public function fotos()
     {
@@ -28,5 +29,9 @@ class Anuncio extends Model
     public function categoria()
     {
         return $this->belongsTo('App\Categoria');
+    }
+
+    public function user(){
+        return $this->belongsTo('App\User');
     }
 }

@@ -14,8 +14,11 @@ class CreateFotosTable extends Migration
     public function up()
     {
         Schema::create('fotos', function (Blueprint $table) {
-            $table->id();
+            $table->bigIncrements('id');
+            $table->string('enlace');
             $table->timestamps();
+            $table->bigInteger('anuncio_id')->unsigned()->nullable();
+            $table->foreign('anuncio_id')->references('id')->on('anuncios');
         });
     }
 
