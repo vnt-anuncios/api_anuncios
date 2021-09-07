@@ -2,13 +2,14 @@
 
 namespace App;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
-    use Notifiable;
+    use Notifiable, Notifiable;
+    use HasApiTokens;
 
     /**
      * The attributes that are mass assignable.
@@ -21,11 +22,17 @@ class User extends Authenticatable
 
     public function favoritos()
     {
-        return $this->belongsToMany('App\Anuncio')->using('App\Favorito');
+        return $this->belongsToMany('App\Anuncio', 'favoritos', 'user_id', 'anuncio_id')->withTimestamps();
     }
 
-    public function anuncios(){
+    public function anuncios()
+    {
         return $this->hasMany('App\Anuncio');
+    }
+
+    public function socialAcounts()
+    {
+        return $this->hasMany(SocialAcount::class, 'user_id', 'id');
     }
 
     /**
@@ -34,7 +41,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token','created_at','updated_at','email_verified_at'
+        'password', 'remember_token', 'created_at', 'updated_at', 'email_verified_at'
     ];
 
     /**

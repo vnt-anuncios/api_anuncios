@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Anuncio extends Model
 {
     protected $fillable = ['titulo', 'precio', 'estado', 'enlace', 'descripcion'];
-    protected $hidden = ['created_at','updated_at'];
+    protected $hidden = ['created_at', 'updated_at'];
 
     public function fotos()
     {
@@ -24,14 +24,15 @@ class Anuncio extends Model
     }
     public function favoritos()
     {
-        return $this->belongsToMany('App\Anuncio')->using('App\Favorito');
+        return $this->belongsToMany('App\User', 'favoritos', 'anuncio_id', 'user_id');
     }
     public function categoria()
     {
         return $this->belongsTo('App\Categoria');
     }
 
-    public function user(){
+    public function user()
+    {
         return $this->belongsTo('App\User');
     }
 }

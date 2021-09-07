@@ -2,25 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\Anuncio;
 use Illuminate\Http\Request;
 
-class AnuncioController extends ApiController
+class UserFavoritoController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    /*public function index()
-    {
-        $anuncios = Anuncio::orderBy('fecha_publicacion', 'DESC')->with(['fotos', 'user'/*,'categoria'])->get();
-        return $this->showAll($anuncios);
-    }*/
-
     public function index()
     {
-        return $this->showAll(Anuncio::all());
+        //
     }
 
     /**
@@ -47,21 +40,21 @@ class AnuncioController extends ApiController
     /**
      * Display the specified resource.
      *
-     * @param  \App\Anuncio  $anuncio
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Anuncio $anuncio)
+    public function show($id)
     {
-        return $this->showOne($anuncio);
+        //
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Anuncio  $anuncio
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Anuncio $anuncio)
+    public function edit($id)
     {
         //
     }
@@ -70,10 +63,10 @@ class AnuncioController extends ApiController
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Anuncio  $anuncio
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Anuncio $anuncio)
+    public function update(Request $request, $id)
     {
         //
     }
@@ -81,13 +74,11 @@ class AnuncioController extends ApiController
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Anuncio  $anuncio
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Anuncio $anuncio)
+    public function destroy($id)
     {
-        $anuncio->delete();
-
-        return $this->showOne($anuncio);
+        //
     }
 }
