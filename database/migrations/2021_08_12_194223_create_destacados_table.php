@@ -15,8 +15,8 @@ class CreateDestacadosTable extends Migration
     {
         Schema::create('destacados', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->date('fechaInicio');
-            $table->date('fechaFin');
+            $table->date('fecha_inicio');
+            $table->date('fecha_fin');
             $table->boolean('estado');
             //$table->string('descripcion');
             $table->timestamps();

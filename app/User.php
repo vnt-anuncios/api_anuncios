@@ -21,10 +21,11 @@ class User extends Authenticatable
 
     public function favoritos()
     {
-        return $this->belongsToMany('App\Anuncio')->using('App\Favorito');
+        return $this->belongsToMany('App\Anuncio', 'favoritos', 'user_id', 'anuncio_id');
     }
 
-    public function anuncios(){
+    public function anuncios()
+    {
         return $this->hasMany('App\Anuncio');
     }
 
@@ -34,7 +35,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token','created_at','updated_at','email_verified_at'
+        'password', 'remember_token', 'created_at', 'updated_at', 'email_verified_at'
     ];
 
     /**
