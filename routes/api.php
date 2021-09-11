@@ -47,3 +47,4 @@ Route::get('destacados', 'ApiControllers\DestacadoAnuncioController@index')->nam
 
 //anuncios de una categoria
 Route::get('categorias/{categoria}/anuncios', 'ApiControllers\CategoriaAnuncioController@anuncioOfTheCategoria')->name('anuncio.categoria.detail');
+Route::get('anuncioswithdestacado/', 'ApiControllers\CategoriaAnuncioController@anuncioOrderByDestacadoFirst')->name('anuncio.orderby.destacados');
