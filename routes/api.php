@@ -36,3 +36,14 @@ Route::get('anuncios/{anuncio}/fotos', 'ApiControllers\AnuncioDetailController@g
 Route::get('anuncios/{anuncio}/user/{user}/isfavorito', 'ApiControllers\UserAnuncioController@isAnuncioFavorito')->name('user.isFavorito');
 Route::get('anuncios', 'ApiControllers\UserAnuncioController@getAnuncioDetail2')->name('anuncio.detail');
 Route::get('anuncios/user/{user}/detail', 'ApiControllers\UserAnuncioController@getAnuncioDetail')->name('user.anuncio.detail');
+
+
+
+
+//destacados
+
+
+Route::get('destacados', 'ApiControllers\DestacadoAnuncioController@index')->name('destacado.anuncio.detail');
+
+//anuncios de una categoria
+Route::get('categorias/{categoria}/anuncios', 'ApiControllers\CategoriaAnuncioController@anuncioOfTheCategoria')->name('anuncio.categoria.detail');
