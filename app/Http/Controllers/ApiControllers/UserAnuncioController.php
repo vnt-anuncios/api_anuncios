@@ -18,7 +18,7 @@ class UserAnuncioController extends ApiController
 
     public function getUserFavorito(User $user)
     {
-        $favorito = $user->favoritos;
+        $favorito = $user::with('anuncios')->get();
         return $this->showAll($favorito);
     }
 
@@ -30,13 +30,18 @@ class UserAnuncioController extends ApiController
         return $this->showOne($isFavorito == null ? new Favorito() : $isFavorito);
     }
 
-    public function getAnuncioDetail(User $user)
+    public function getAnuncioDetail()
     {
-        $anuncios = Anuncio::orderBy('fecha_publicacion', 'DESC')
-            ->with(['fotos', 'user', 'categoria', 'destacado', 'favoritos' => function ($q) use ($user) {
-                $q->where("user_id", $user->id);
-            }])->paginate(15);
-        return  response()->json($anuncios, 200);
+        try {
+            $user = auth()->user();
+            $anuncios = Anuncio::orderBy('fecha_publicacion', 'DESC')
+                ->with(['fotos', 'user', 'categoria', 'destacado', 'favoritos' => function ($q) use ($user) {
+                    $q->where("user_id", $user->id);
+                }])->paginate(15);
+            return  response()->json($anuncios, 200);
+        } catch (\Throwable $th) {
+            return $this->errorReponse("inautorizado", 401);
+        }
     }
 
     public function getAnuncioDetail2()

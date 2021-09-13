@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ApiControllers\ApiAuth\AuthApiController;
 use App\Http\Controllers\ApiControllers\UserController;
+use App\Http\Controllers\ApiControllers\UserFavorito;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -32,6 +33,14 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::get("user", [UserController::class, 'getUser']);
     Route::post("user", [UserController::class, 'updateUser']);
     //end user
+    // anuncios detail
+    Route::get('anunciosdetails', 'ApiControllers\UserAnuncioController@getAnuncioDetail')->name('user.anuncio.detail');
+    //Route::get('anunciosdetailsdestacado', 'ApiControllers\UserAnuncioController@getAnuncioDetail')->name('user.anuncio.detail');
+    //anuncios
+
+    //add favorito
+    Route::get("favorito/{anuncio}", [UserFavorito::class, 'addFavorito'])->name("add.favorito.anuncio");
+    Route::delete("favorito/{anuncio}", [UserFavorito::class, 'deleteFavorito'])->name("delete.favorito.anuncio");
 });
 
 
