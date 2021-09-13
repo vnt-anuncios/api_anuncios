@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\ApiControllers\ApiAuth\AuthApiController;
+use App\Http\Controllers\ApiControllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -17,6 +19,25 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+
+Route::post('requestToken', [AuthApiController::class, 'requestToken']);
+Route::post('requestTokenGoogle', [AuthApiController::class, 'requestTokenGoogle']);
+
+Route::middleware(['auth:sanctum'])->group(function () {
+    Route::get('logout', [AuthApiController::class, 'logout']);
+
+    //user
+    Route::post("user/{user}/telefono", [UserController::class, 'saveTelefono']);
+    Route::get("user", [UserController::class, 'getUser']);
+    Route::post("user", [UserController::class, 'updateUser']);
+    //end user
+});
+
+
+
+
+
 
 Route::apiResource('categorias', CategoriaController::class, ['only' => ['index', 'show']]);
 Route::get('categoriascredito', 'CreditoCategoriaController@categoriaCredito');

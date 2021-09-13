@@ -15,6 +15,8 @@
         "guzzlehttp/guzzle": "^6.3",
         "hmazter/laravel-schedule-list": "^2.2",
         "laravel/framework": "^7.0",
+        "laravel/sanctum": "^2.11",
+        "laravel/socialite": "^5.2",
         "laravel/tinker": "^2.0",
         "laravel/ui": "2.4",
         "laravelcollective/html": "^6.2"
