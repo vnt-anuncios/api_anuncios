@@ -41,7 +41,10 @@ Route::middleware(['auth:sanctum'])->group(function () {
     //add favorito
     Route::get("favorito/{anuncio}", [UserFavorito::class, 'addFavorito'])->name("add.favorito.anuncio");
     Route::delete("favorito/{anuncio}", [UserFavorito::class, 'deleteFavorito'])->name("delete.favorito.anuncio");
+    Route::get("favoritos", [UserFavorito::class, 'getFavoritos'])->name("get.favoritos");
 });
+
+
 
 
 

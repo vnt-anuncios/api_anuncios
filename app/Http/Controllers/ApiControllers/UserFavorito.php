@@ -5,6 +5,7 @@ namespace App\Http\Controllers\ApiControllers;
 use App\Http\Controllers\ApiController;
 use Illuminate\Http\Request;
 use App\Anuncio;
+use App\Favorito;
 use App\User;
 
 class UserFavorito extends ApiController
@@ -31,5 +32,9 @@ class UserFavorito extends ApiController
     }
 
     public function getFavoritos()
-    { }
+    {
+        $user = auth()->user();
+        $favorito = $user->favoritos();
+        print($favorito);
+    }
 }
