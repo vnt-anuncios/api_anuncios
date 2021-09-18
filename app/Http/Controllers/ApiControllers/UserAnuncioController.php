@@ -6,18 +6,24 @@ use App\Http\Controllers\ApiController;
 use App\User;
 use App\Anuncio;
 use App\Favorito;
-use Illuminate\Http\Request;
 
 class UserAnuncioController extends ApiController
 {
-    public function getUserAnuncio(User $user)
+    public function misAnuncios()
     {
-        $anuncios = $user->anuncios;
+        try {
+            $user = auth()->user();
+            $anuncios = $user->anuncios()->with(["fotos", "categoria", "destacado", "user"])->get();
+            return $this->showAll($anuncios);
+        } catch (\Throwable $th) {
+            return $this->errorReponse("no se pudo completar la accion", 500);
+        }
         return $this->showAll($anuncios);
     }
 
-    public function getUserFavorito(User $user)
+    public function getUserFavorito()
     {
+        $user = auth()->user();
         $favorito = $user::with('anuncios')->get();
         return $this->showAll($favorito);
     }

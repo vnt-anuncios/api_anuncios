@@ -22,4 +22,8 @@ class Destacado extends Model
         $destacados = $this->where('estado', '1')->whereDate('fecha_fin', '<=', $now)->update(['estado' => false]);
         return $destacados;
     }
+
+    protected $casts = [
+        "estado" => "boolean",
+    ];
 }

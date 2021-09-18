@@ -22,4 +22,10 @@ class CategoriaController extends ApiController
         }
         return $this->showAll($subCategoria);
     }
+
+    public function categorias()
+    {
+        $categoria = Categoria::with(["subCategoria"])->orderBy("id")->get();
+        return $this->showAll($categoria);
+    }
 }
