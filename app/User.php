@@ -5,10 +5,11 @@ namespace App;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
-    use Notifiable;
+    use Notifiable, HasApiTokens;
 
     /**
      * The attributes that are mass assignable.
@@ -16,15 +17,18 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password', 'apellido', 'telefono', 'ubicacion', 'foto', 'estado'
     ];
+
+
 
     public function favoritos()
     {
-        return $this->belongsToMany('App\Anuncio')->using('App\Favorito');
+        return $this->belongsToMany('App\Anuncio', 'favoritos', 'user_id', 'anuncio_id');
     }
 
-    public function anuncios(){
+    public function anuncios()
+    {
         return $this->hasMany('App\Anuncio');
     }
 
@@ -34,7 +38,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token','created_at','updated_at','email_verified_at'
+        'password', 'remember_token', 'created_at', 'updated_at', 'email_verified_at'
     ];
 
     /**
@@ -44,5 +48,6 @@ class User extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'estado' => 'boolean'
     ];
 }

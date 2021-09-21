@@ -6,13 +6,19 @@ use App\Destacado;
 use Faker\Generator as Faker;
 
 $factory->define(Destacado::class, function (Faker $faker) {
-    $date = $faker->date();
-    $datefin= strtotime($date."+ 30 days");
-    $datefin = date("Y-m-d",$datefin);
+    $dateInit = $faker->dateTimeBetween('-30 days', 'now + 5 days');
+    $dateExpire = $faker->dateTimeBetween('now - 5 days', 'now + 20 days');
+    $now = date("Y-m-d");
+
+    $date1 = date_create($now);
+    $date2 = date_create($dateExpire->format("Y-m-d"));
+    $dif = date_diff($date1, $date2);
+    $timeDiff = $dif->format("%R%a days");
     return [
-        'fechainicio' => $date,
-        'fechafin' => $datefin,
+        'fecha_inicio' => $dateInit,
+        'fecha_fin' => $dateExpire,
         //'anuncio_id' => App\Anuncio::all()->random()->id,
-        'anuncio_id' => $faker->unique()->numberBetween(1,150),
+        'estado' => ($timeDiff < 0) ? false : true,
+        'anuncio_id' => $faker->unique()->numberBetween(1, 150),
     ];
 });

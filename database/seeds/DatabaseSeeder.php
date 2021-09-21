@@ -18,10 +18,9 @@ class DatabaseSeeder extends Seeder
             //CreditoSeeder::class,
             AnuncioSeeder::class,
             FotoSeeder::class,
-            //DestacadoSeeder::class,
+            DestacadoSeeder::class,
             //BannerSeeder::class,
             FavoritoSeeder::class,
-
-         ]);
+        ]);
     }
 }
