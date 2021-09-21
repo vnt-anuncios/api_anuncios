@@ -34,7 +34,12 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::get("user", [UserController::class, 'getUser']);
     Route::post("user", [UserController::class, 'updateUser']);
     //end user
+
+
     // anuncios detail
+    //anuncios de una categoria
+    Route::get('misanuncios', 'ApiControllers\UserAnuncioController@misAnuncios')->name('mis.anuncios');
+    Route::post('agregarAnuncio', 'ApiControllers\UserAnuncioController@agregarAnuncio')->name('agregar.anuncio');
     Route::get('anunciosdetails', 'ApiControllers\UserAnuncioController@getAnuncioDetail')->name('user.anuncio.detail');
     //Route::get('anunciosdetailsdestacado', 'ApiControllers\UserAnuncioController@getAnuncioDetail')->name('user.anuncio.detail');
     //anuncios
@@ -47,9 +52,6 @@ Route::middleware(['auth:sanctum'])->group(function () {
 
     //anuncios de una categoria
     Route::get('categoria/{categoria}/anuncios', 'ApiControllers\CategoriaAnuncioController@anunciosOfCategoria')->name('anuncios.categoria');
-
-    //anuncios de una categoria
-    Route::get('misanuncios', 'ApiControllers\UserAnuncioController@misAnuncios')->name('anuncios.categoria');
 });
 //categorias
 Route::get("categorias", [CategoriaController::class, 'categorias'])->name("categorias");
